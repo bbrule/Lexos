@@ -4,6 +4,7 @@
 
 {% block head %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/scripts_scrub.js') }}?ver={{version}}"></script>
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 {% endblock %}
 
 
@@ -68,15 +69,17 @@
 
 </fieldset>
 
-<fieldset id="additionalscrubbingoptions">
-<legend id="advanced-title" class="has-expansion">Additional Options<span class="icon-arrow-right"></span></legend>
-
-<div class="advanced-options expansion cf">
-	<fieldset class="advanced-option">
-		{% set sw_showing = (session['scrubbingoptions']['optuploadnames']['swfileselect[]']) or (session['scrubbingoptions']['manualstopwords']) %}
-		<legend class="has-expansion has-tooltip">Stopwords<span class="icon-arrow-right {{ 'showing' if sw_showing }}"></span><span class="icon-help tooltip scrub medium" data-tooltip="Input a list of stopwords (words to be removed). Manual input and files should be formatted alike."></span></legend>
-
-		<div id="stopwordinput" class="expansion has-tooltip {{ 'showing' if sw_showing }}">
+<!-- Advanced Options -->
+<div class="advanced-options">
+  <h3 class="level1 ui-widget-header"><span class="advanced-options-label">Advanced Options</span><i class="chevron fa fa-angle-right fa-2x"></i></h3>  
+  <div class="expandable">
+  
+    <!-- Stop Words -->
+    {% set sw_showing = (session['scrubbingoptions']['optuploadnames']['swfileselect[]']) or (session['scrubbingoptions']['manualstopwords']) %}
+    <h3 class="level2 ui-widget-header"><span class="advanced-options-label">Stop Words</span><i class="chevron fa fa-angle-right fa-2x {{ 'showing' if sw_showing }}""></i><span class="icon-help tooltip scrub medium" data-tooltip="Input a list of stopwords (words to be removed). Manual input and files should be formatted alike." style="position:relative;margin-left:25px;"></span></h3>
+	<div class="expandable">
+		<fieldset class="advanced-option">
+		<div id="stopwordinput" class="has-tooltip">
 			<span class="icon-help tooltip tiny scrub-additional"
 			data-tooltip="Stopwords list format: a list of comma-, space- or newline separated words to be removed from the text."></span>
 			<textarea class="manualinput" name="manualstopwords" placeholder="Enter stopwords..." >{{ session['scrubbingoptions']['manualstopwords'] }}</textarea>
@@ -91,13 +94,15 @@
 				<input type="file" class="scrub-upload" id="swfileselect" name="swfileselect[]" />
 			</div>
 		</div>
-	</fieldset>
-
+		</fieldset>
+	</div>
+	
+	<!-- Lemmas -->
+	{% set lem_showing = (session['scrubbingoptions']['optuploadnames']['lemfileselect[]']) or (session['scrubbingoptions']['manuallemmas']) %}
+    <h3 class="level2 ui-widget-header"><span class="advanced-options-label">Lemmas</span><i class="chevron fa fa-angle-right fa-2x {{ 'showing' if sw_showing }}""></i><span class="icon-help tooltip scrub medium" data-tooltip="Input a list of lemmas (word replacements). Manual input and files should be formatted alike." style="position:relative;margin-left:25px;"></span></h3>
+	<div class="expandable">
 	<fieldset class="advanced-option">
-		{% set lem_showing = (session['scrubbingoptions']['optuploadnames']['lemfileselect[]']) or (session['scrubbingoptions']['manuallemmas']) %}
-		<legend class="has-expansion has-tooltip">Lemmas<span class="icon-arrow-right {{ 'showing' if lem_showing }}"></span><span class="icon-help tooltip scrub medium" data-tooltip="Input a list of lemmas (word replacements). Manual input and files should be formatted alike."></span></legend>
-
-		<div id="lemmainput" class="expansion has-tooltip {{ 'showing' if lem_showing }}">
+		<div id="lemmainput" class="has-tooltip">
 			<span class="icon-help tooltip tiny scrub-additional"
 			data-tooltip="Lemma list format: Each line should be comma separated element(s) followed by the element with which to replace them (e.g. 'cyng, kyng, king' will replace 'cyng' and 'kyng' with 'king'). Note: colons (':') can be used to force the replacement character to the beginning or end; the side with more than one element will be those replaced (default behavior: left)."></span>
 			<textarea class="manualinput" name="manuallemmas" placeholder="Enter lemmas..." >{{ session['scrubbingoptions']['manuallemmas'] }}</textarea>
@@ -113,12 +118,14 @@
 			</div>
 		</div>
 	</fieldset>
+	</div>
 
+	<!-- Consolidations -->
+	{% set cons_showing = (session['scrubbingoptions']['optuploadnames']['consfileselect[]']) or (session['scrubbingoptions']['manualconsolidations']) %}
+    <h3 class="level2 ui-widget-header"><span class="advanced-options-label">Consolidations</span><i class="chevron fa fa-angle-right fa-2x {{ 'showing' if sw_showing }}""></i><span class="icon-help tooltip scrub medium" data-tooltip="Input a list of consolidations (character replacements). Manual input and files should be formatted alike." style="position:relative;margin-left:25px;"></span></h3>
+	<div class="expandable">
 	<fieldset class="advanced-option">
-		{% set cons_showing = (session['scrubbingoptions']['optuploadnames']['consfileselect[]']) or (session['scrubbingoptions']['manualconsolidations']) %}
-		<legend class="has-expansion has-tooltip">Consolidations<span class="icon-arrow-right {{ 'showing' if cons_showing }}"></span><span class="icon-help tooltip scrub medium" data-tooltip="Input a list of consolidations (character replacements). Manual input and files should be formatted alike."></span></legend>
-
-		<div id="consolidationsinput" class="expansion has-tooltip {{ 'showing' if cons_showing }}">
+		<div id="consolidationsinput" class="has-tooltip">
 			<span class="icon-help tooltip tiny scrub-additional"
 			data-tooltip="Consolidations list format: Each line should be comma separated element(s) followed by the element with which to replace them (e.g. 'a, b, c' will replace 'a' and 'b' with 'c'). Note: colons (':') can be used to force the replacement character to the beginning or end; the side with more than one element will be those replaced (default behavior: left)."></span>
 			<textarea class="manualinput" name="manualconsolidations" placeholder="Enter consolidations..." >{{ session['scrubbingoptions']['manualconsolidations'] }}</textarea>
@@ -134,13 +141,14 @@
 			</div>
 		</div>
 	</fieldset>
+	</div>
 
+	<!-- Special Characters -->
+	{% set sc_showing = (session['scrubbingoptions']['optuploadnames']['scfileselect[]']) or (session['scrubbingoptions']['manualspecialchars']) or (session['scrubbingoptions']['entityrules'] != 'none') %}
+    <h3 class="level2 ui-widget-header"><span class="advanced-options-label">Special Characters</span><i class="chevron fa fa-angle-right fa-2x {{ 'showing' if sw_showing }}""></i><span class="icon-help tooltip scrub medium" data-tooltip="Input a list of rules for handling non-unicode special characters. Manual input and files should be formatted alike." style="position:relative;margin-left:25px;"></span></h3>
+	<div class="expandable">
 	<fieldset class="advanced-option">
-		{% set sc_showing = (session['scrubbingoptions']['optuploadnames']['scfileselect[]']) or (session['scrubbingoptions']['manualspecialchars']) or (session['scrubbingoptions']['entityrules'] != 'none') %}
-		<legend class="has-expansion has-tooltip">Special Characters<span class="icon-arrow-right {{ 'showing' if sc_showing }}"></span><span class="icon-help tooltip scrub medium" data-tooltip="Input a list of rules for handling non-unicode special characters. Manual input and files should be formatted alike."></span></legend>
-
-		<div id="specialcharsinput" class="expansion has-tooltip {{ 'showing' if sc_showing }}">
-
+		<div id="specialcharsinput" class="has-tooltip">
 			<select id="entityrules" name="entityrules">
 				<option value="none" {{ "selected" if session['scrubbingoptions']['entityrules'] == 'none'}}> - Select Built-In Option - </option>
 				<option value="default" {{ "selected" if session['scrubbingoptions']['entityrules'] == 'default' }}>Default</option>
@@ -165,9 +173,11 @@
 			</div>
 		</div>
 	</fieldset>
-</div>
+	</div>
 
-</fieldset>
+  </div> <!-- End Advanced Options Expandable -->
+</div>  <!-- End Advanced Options -->
+
 {% endblock %}
 
 

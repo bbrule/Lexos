@@ -1,8 +1,20 @@
+  $(function() {  
+    var options = {"easing" : "linear"};
+	$('.level1').click(function(){
+		$(this).find('.chevron').toggleClass( "fa-angle-right fa-angle-down" );
+		$( ".expandable" ).toggle( "blind", options, 400 );
+	});
+	$('.level2').click(function(){
+		$(this).find('.chevron').toggleClass( "fa-angle-right fa-angle-down" );
+		$(this).nextAll(".expandable").first().toggle( "blind", options, 250 );
+	});
+  });
+  
 $(function() {
 	// display additional options on load
-	var advancedOptions = $("#advanced-title");
-	advancedOptions.find('.icon-arrow-right').addClass("showing");
-	advancedOptions.siblings('.expansion').slideToggle(0);
+	//var advancedOptions = $("#advanced-title");
+	//advancedOptions.find('.icon-arrow-right').addClass("showing");
+	//advancedOptions.siblings('.expansion').slideToggle(0);
 
 	$('.scrub-upload').change(function(ev) {
 		filename = ev.target.files[0].name;

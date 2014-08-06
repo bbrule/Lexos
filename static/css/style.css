@@ -607,7 +607,7 @@ footer {
 
 /* ================== COLLAPSABLE DIV STYLING ==================== */
 
-
+/*
 .has-expansion .icon-arrow-right {
   margin-left: 10px;
 }
@@ -638,7 +638,39 @@ footer {
   -o-transform:      rotate(90deg);
   transform:         rotate(90deg);
 }
+*/
 
+/* ================== COLLAPSABLE DIV STYLING FOR SCRUB ==================== */
+
+.advanced-options {
+    width: 100%;
+}
+
+.advanced-options-label {
+	font-family: "Lato", sans-serif;
+	font-size: 21px;
+	line-height: 40px;
+	color: #333;
+	border-bottom: 1px solid #BBB;
+	padding: .4em .0 .4em 0;
+}
+
+.expandable {
+    position: relative;
+    width: 100%;
+    padding: 0.4em;
+}
+ 
+.chevron {
+	margin-left: 10px;
+	color: #666;
+}
+
+.ui-widget-header {
+	cursor: pointer;
+	border: none;
+	background: none;
+}
 
 /* ================== MANAGE STYLING ============================= */
 
