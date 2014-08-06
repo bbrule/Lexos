@@ -1,7 +1,10 @@
-  $(function() {  
-    var options = {"easing" : "linear"};
+  $(function() {
+	// Close sub-panels on load
+	$(".level2").nextAll( ".expandable" ).toggle();
+  
+    var options = {"easing" : "easeInOutQuad"};
 	$('.level1').click(function(){
-		$(this).find('.chevron').toggleClass( "fa-angle-right fa-angle-down" );
+		$(this).find('.chevron').toggleClass( "fa-angle-right fa-angle-down", options, 1000 );
 		$( ".expandable" ).toggle( "blind", options, 400 );
 	});
 	$('.level2').click(function(){
@@ -9,7 +12,7 @@
 		$(this).nextAll(".expandable").first().toggle( "blind", options, 250 );
 	});
   });
-  
+
 $(function() {
 	// display additional options on load
 	//var advancedOptions = $("#advanced-title");
