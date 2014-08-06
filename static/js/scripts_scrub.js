@@ -1,5 +1,5 @@
   $(function() {
-	// Close sub-panels on load
+	// Close sub-panels on load (but advanced options are open)
 	$(".level2").nextAll( ".expandable" ).toggle();
   
     var options = {"easing" : "easeInOutQuad"};
