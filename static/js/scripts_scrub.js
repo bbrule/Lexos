@@ -1,18 +1,41 @@
   $(function() {
 	// Close sub-panels on load (but advanced options are open)
 	$(".level2").nextAll( ".expandable" ).toggle();
+	$('.level1').find('.chevron').css({
+        '-webkit-transform':'rotate(90deg)', 
+        '-moz-transform':'rotate(90deg)',
+        '-o-transform':'rotate(90deg)',
+        '-ms-transform':'rotate(90deg)',
+        'transform':'rrotate(90deg)'
+    });
   
     var options = {"easing" : "easeInOutQuad"};
 	$('.level1').click(function(){
-		$(this).find('.chevron').toggleClass( "fa-angle-right fa-angle-down", options, 1000 );
-		$( ".expandable" ).toggle( "blind", options, 400 );
+		rotate($(this).find('.chevron'));
+		$( ".expandable" ).toggle( "blind", 400, "easeInQuad" );
 	});
 	$('.level2').click(function(){
-		$(this).find('.chevron').toggleClass( "fa-angle-right fa-angle-down" );
-		$(this).nextAll(".expandable").first().toggle( "blind", options, 250 );
+		rotate($(this).find('.chevron'));
+		$(this).nextAll(".expandable").first().toggle( "blind", 400, "easeInQuad" );
 	});
   });
 
+  function rotate(el) {
+	if (el.hasClass('showing')) {
+		position = 0;
+		el.removeClass( "showing" );
+	} else {
+		position = 90;
+		el.addClass( "showing" );
+	}
+	el.css({
+        '-webkit-transform':'rotate('+position+'deg)', 
+        '-moz-transform':'rotate('+position+'deg)',
+        '-o-transform':'rotate('+position+'deg)',
+        '-ms-transform':'rotate('+position+'deg)',
+        'transform':'rotate('+position+'deg)'
+    });
+  }
 $(function() {
 	// display additional options on load
 	//var advancedOptions = $("#advanced-title");

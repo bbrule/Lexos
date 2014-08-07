@@ -661,9 +661,16 @@ footer {
     padding: 0.4em;
 }
  
-.chevron {
+.chevron{
 	margin-left: 10px;
 	color: #666;
+}
+
+.fa-angle-right {
+  -webkit-transition: all 0.25s ease;
+  -moz-transition:    all 0.25s ease;
+  -o-transition:      all 0.25s ease;
+  transition:         all 0.25s ease;
 }
 
 .ui-widget-header {
@@ -671,6 +678,7 @@ footer {
 	border: none;
 	background: none;
 }
+
 
 /* ================== MANAGE STYLING ============================= */
 
